@@ -58,7 +58,7 @@ Find Nth Node - Navigate through route networks
 
 Longest Route - Identify maximum duration routes
 
-Shortest Path - Calculate optimal paths using Dijkstra's algorithm
+Shortest Path - Calculate optimal paths
 
 # 🛠️ Technology Stack
 Backend: Django 4.x
