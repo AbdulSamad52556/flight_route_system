@@ -43,7 +43,7 @@ python manage.py runserver
 
 ## Access the application
 
-Main application: http://127.0.0.1:8000/
+Main application: http://127.0.0.1:8000/add-route/
 
 Admin panel: http://127.0.0.1:8000/admin/
 
