@@ -72,7 +72,7 @@ def shortest_path(request):
             from_airport = form.cleaned_data['from_airport']
             to_airport = form.cleaned_data['to_airport']
             
-            # Simple BFS to find shortest path
+            # Dijkstra's algorithm to find shortest path
             result = find_shortest_path(from_airport, to_airport)
     else:
         form = ShortestPathForm()
