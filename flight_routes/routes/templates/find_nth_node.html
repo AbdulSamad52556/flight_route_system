@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">🔍 Find Nth Left or Right Node</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.start_airport.id_for_label }}" class="form-label">Start Airport</label>
+                        {{ form.start_airport }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.direction.id_for_label }}" class="form-label">Direction</label>
+                        {{ form.direction }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.steps.id_for_label }}" class="form-label">Number of Steps (N)</label>
+                        {{ form.steps }}
+                        <div class="form-text">How many steps to traverse in the chosen direction</div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            🔍 Find Node
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results -->
+        {% if result or result == None %}
+        <div class="card mt-4 {% if result %}border-success{% else %}border-danger{% endif %}">
+            <div class="card-header {% if result %}bg-success text-white{% else %}bg-danger text-white{% endif %}">
+                <h5 class="mb-0">📊 Result</h5>
+            </div>
+            <div class="card-body">
+                {% if result %}
+                    <div class="alert alert-success">
+                        <h6>✅ Route Found!</h6>
+                        <p class="mb-1"><strong>Starting Airport:</strong> {{ form.start_airport.value }}</p>
+                        <p class="mb-1"><strong>Direction:</strong> {{ form.direction.value|title }}</p>
+                        <p class="mb-1"><strong>Steps Taken:</strong> {{ form.steps.value }}</p>
+                        <hr>
+                        <h5 class="mt-3">🎯 Destination Airport:</h5>
+                        <div class="p-3 bg-light rounded">
+                            <h4 class="text-success mb-0">
+                                {{ result.code }} - {{ result.name }}
+                            </h4>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger">
+                        <h6>❌ No Route Found</h6>
+                        <p class="mb-0">
+                            Could not find a route after {{ form.steps.value }} {{ form.direction.value }} steps 
+                            starting from {{ form.start_airport.value }}.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Route Visualization -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">🗺️ Route Visualization</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center p-4 bg-light rounded">
+                    <div class="mb-3">
+                        <code>Airport A → (left) → Airport B → (right) → Airport C</code>
+                    </div>
+                    <p class="text-muted mb-0">
+                        The system navigates through connected airports based on left/right directions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
